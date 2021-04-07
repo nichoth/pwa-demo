@@ -6,7 +6,8 @@ var filesToCache = [
   '/index.html',
   '/style.css',
   '/bundle.js',
-  '/coffee1.jpg'
+  '/coffee1.jpg',
+  '/favicon.ico'
 ];
 
 // Next, we add a function to install the service worker and create the
@@ -45,13 +46,15 @@ self.addEventListener('fetch', function (ev) {
     );
 });
 
-  import {ExpirationPlugin} from 'workbox-expiration';
-  import {registerRoute} from 'workbox-routing';
-  import {StaleWhileRevalidate} from 'workbox-strategies';
+// ------------------------------------------------------
 
-  // Cache Google Fonts with a stale-while-revalidate strategy, with
-  // a maximum number of entries.
-  registerRoute(
+import {ExpirationPlugin} from 'workbox-expiration';
+import {registerRoute} from 'workbox-routing';
+import {StaleWhileRevalidate} from 'workbox-strategies';
+
+// Cache Google Fonts with a stale-while-revalidate strategy, with
+// a maximum number of entries.
+registerRoute(
     ({url}) => url.origin === 'https://fonts.googleapis.com' ||
                url.origin === 'https://fonts.gstatic.com',
     new StaleWhileRevalidate({
@@ -60,4 +63,5 @@ self.addEventListener('fetch', function (ev) {
         new ExpirationPlugin({maxEntries: 20}),
       ],
     }),
-  );
+);
+
