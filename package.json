@@ -13,7 +13,8 @@
     "copy": "cp src/manifest.json public && cp src/*.html public",
     "sass": "sass ./src/style/style.scss ./public/style.css",
     "sass-watch": "sass --watch src/style:public",
-    "build": "npm run copy && npm run sass",
+    "build": "npm run copy && npm run sass && npm run build-js",
+    "build-js": "browserify src/index.js --debug > public/bundle.js",
     "start": "npm run build && concurrently --kill-others \"ecstatic public\" \"npm run sass-watch\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

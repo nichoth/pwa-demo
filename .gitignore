@@ -90,3 +90,5 @@ node_modules
 
 bundle.js
 src/style/
+public/bundle.js
+public/
