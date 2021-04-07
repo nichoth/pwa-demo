@@ -1,36 +1,33 @@
-// Use a cacheName for cache versioning
-var cacheName = 'v1:static';
+var cacheName = 'hello-pwa';
+var filesToCache = [
+  // This is so the browser caches index.html even if the user doesn’t
+  // directly type in that file name.
+  '/',
+  '/index.html',
+  '/style.css',
+  '/bundle.js'
+];
 
-// During the installation phase, you'll usually want to cache static assets.
-self.addEventListener('install', function(e) {
-    // Once the service worker is installed, go ahead and fetch the resources to make this work offline.
-    e.waitUntil(
-        caches.open(cacheName).then(function(cache) {
-            return cache.addAll([
-                './',
-                './css/style.css',
-                './bundle.js',
-                // './css/fonts/roboto.woff',
-                './offline.html'
-            ]).then(function() {
-                self.skipWaiting();
-            });
-        })
-    );
+// Next, we add a function to install the service worker and create the
+// browser cache using `cacheName`
+
+/* Start the service worker and cache all of the app's content */
+self.addEventListener('install', function (e) {
+    console.log('**install**', e)
+  e.waitUntil(
+    caches.open(cacheName).then(function(cache) {
+      return cache.addAll(filesToCache);
+    })
+  );
 });
 
-// when the browser fetches a URL…
-self.addEventListener('fetch', function(event) {
-    // … either respond with the cached object or go ahead and fetch the actual URL
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-            if (response) {
-                // retrieve from cache
-                return response;
-            }
-            // fetch as normal
-            return fetch(event.request);
-        })
-    );
+/* Serve cached content when offline */
+self.addEventListener('fetch', function(e) {
+    console.log('**fetch**', e)
+  e.respondWith(
+    caches.match(e.request).then(function(response) {
+      return response || fetch(e.request);
+    })
+  );
 });
 
