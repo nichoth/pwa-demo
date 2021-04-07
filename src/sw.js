@@ -13,9 +13,10 @@ var filesToCache = [
 // browser cache using `cacheName`
 
 /* Start the service worker and cache all of the app's content */
-self.addEventListener('install', function (e) {
-    console.log('**install**', e)
-    e.waitUntil(
+//  it's only called once per service worker
+self.addEventListener('install', function (ev) {
+    console.log('**install**', ev)
+    ev.waitUntil(
         caches.open(cacheName).then(function (cache) {
             return cache.addAll(filesToCache);
         })
@@ -26,6 +27,9 @@ self.addEventListener('install', function (e) {
 self.addEventListener('fetch', function (ev) {
     console.log('**fetch**', ev)
 
+    //  Then we attach respondWith() to prevent the browser's default
+    //  response. Instead it returns a promise because the fetch action
+    //  can take time to finish.
     ev.respondWith(
         caches.match(ev.request).then(function (response) {
             // console.log('**caches.match response**', response)
