@@ -10,7 +10,7 @@
     "sass": "^1.32.8"
   },
   "scripts": {
-    "copy": "cp src/favicon.ico public && cp src/manifest.json public && cp src/*.html public && cp src/*.png public && cp src/sw.js public",
+    "copy": "cp src/*.jpg public && cp src/favicon.ico public && cp src/manifest.json public && cp src/*.html public && cp src/*.png public && cp src/sw.js public",
     "sass": "sass ./src/style/style.scss ./public/style.css",
     "sass-watch": "sass --watch src/style:public",
     "build": "npm run copy && npm run sass && npm run build-js",
