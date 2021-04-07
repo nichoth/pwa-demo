@@ -5,7 +5,8 @@ var filesToCache = [
   '/',
   '/index.html',
   '/style.css',
-  '/bundle.js'
+  '/bundle.js',
+  '/coffee1.jpg'
 ];
 
 // Next, we add a function to install the service worker and create the
@@ -27,7 +28,11 @@ self.addEventListener('fetch', function (ev) {
 
     ev.respondWith(
         caches.match(ev.request).then(function (response) {
-            console.log('**caches.match response**', response)
+            // console.log('**caches.match response**', response)
+            if (ev.request.url.includes('offee')) {
+                console.log('ooofff', ev.request)
+            }
+            console.log('**caches.match image coffee response**', response)
             if (response === undefined) {
                 console.log('undefined cache response', ev.request)
             }

@@ -1,6 +1,6 @@
 {
-    "name": "hello world",
-    "short_name": "hello",
+    "name": "dev coffee",
+    "short_name": "coffee",
     "lang": "en-US",
     "description": "Progressive web application demonstration",
     "icons": [{
