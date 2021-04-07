@@ -29,7 +29,7 @@ self.addEventListener('fetch', function (ev) {
         caches.match(ev.request).then(function (response) {
             console.log('**caches.match response**', response)
             if (response === undefined) {
-                console.log('undefined response', ev.request)
+                console.log('undefined cache response', ev.request)
             }
             return response || fetch(ev.request);
         })
