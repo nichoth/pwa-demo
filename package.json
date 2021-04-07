@@ -10,7 +10,7 @@
     "sass": "^1.32.8"
   },
   "scripts": {
-    "copy": "cp src/*.html public",
+    "copy": "cp src/manifest.json public && cp src/*.html public",
     "sass": "sass ./src/style/style.scss ./public/style.css",
     "sass-watch": "sass --watch src/style:public",
     "build": "npm run copy && npm run sass",
