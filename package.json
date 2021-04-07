@@ -7,14 +7,16 @@
     "budo": "^11.6.4",
     "concurrently": "^6.0.1",
     "ecstatic": "^4.1.4",
+    "esmify": "^2.1.1",
     "sass": "^1.32.8"
   },
   "scripts": {
-    "copy": "cp src/*.jpg public && cp src/favicon.ico public && cp src/manifest.json public && cp src/*.html public && cp src/*.png public && cp src/sw.js public",
+    "copy": "cp src/*.jpg public && cp src/favicon.ico public && cp src/manifest.json public && cp src/*.html public && cp src/*.png public",
     "sass": "sass ./src/style/style.scss ./public/style.css",
     "sass-watch": "sass --watch src/style:public",
-    "build": "npm run copy && npm run sass && npm run build-js",
+    "build": "npm run copy && npm run sass && npm run build-js && npm run build-sw",
     "build-js": "browserify src/index.js --debug > public/bundle.js",
+    "build-sw": "browserify src/sw.js --debug -p esmify > public/sw.js",
     "start": "npm run build && concurrently --kill-others \"ecstatic public\" \"npm run sass-watch\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,5 +30,10 @@
     "url": "https://github.com/nichoth/pwa-demo/issues"
   },
   "homepage": "https://github.com/nichoth/pwa-demo#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "workbox-expiration": "^6.1.2",
+    "workbox-routing": "^6.1.2",
+    "workbox-strategies": "^6.1.2"
+  }
 }
