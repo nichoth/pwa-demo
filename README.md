@@ -24,5 +24,7 @@ see [workbox](https://developers.google.com/web/tools/workbox)
 
 > Wish you could rely on Google Fonts being available offline after the user has visited your site? Add a quick rule to serve them from the cache.
 
+---------------------------------------
 
+https://web.dev/app-like-pwas/
 
